@@ -33,25 +33,33 @@
 // Section: Main Entry Point
 // *****************************************************************************
 // *****************************************************************************
+int local = 0;
+void retTimeSNTP(uint32_t ts){
+    SYS_CONSOLE_PRINT("Current UTC secs: %lu\r\n", ts);
+}
 
-int main ( void )
-{
+int i = 0;
+int main(void) {
     /* Initialize all modules */
-    SYS_Initialize ( NULL );
-
-    while ( true )
-    {
+    SYS_Initialize(NULL);
+    registerUTCCallback(retTimeSNTP);
+    while (true) {
         /* Maintain state machines of all polled MPLAB Harmony modules. */
-        SYS_Tasks ( );
+        SYS_Tasks();
+        
+        if(i == 0){
+            getTimeSNTP();
+        }
+        i++;
+        i %=1000000;
     }
 
     /* Execution should not come here during normal operation */
-
-    return ( EXIT_FAILURE );
+    return ( EXIT_FAILURE);
 }
 
 
 /*******************************************************************************
  End of File
-*/
+ */
 

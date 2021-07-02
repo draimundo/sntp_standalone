@@ -1,2 +1,6 @@
 
 sntp_standalone.X/.generated_files/
+
+sntp_standalone.X/build/
+
+.vscode/
